@@ -98,11 +98,7 @@ def load_configuration():
 
     # Blob Storage configuration
     blob_connection_string = os.environ["BLOB_CONNECTION_STRING"]
-    search_blob_connection_string = os.getenv("SEARCH_BLOB_DATASOURCE_CONNECTION_STRING", blob_connection_string)
     blob_container_name = os.getenv("BLOB_CONTAINER_NAME", "csv-vec")
-    
-    # Debug: Show connection string format (safely)
-    print(f"🔍 Debug - Connection string format: {search_blob_connection_string[:50]}...")
 
     config = {
         'credential': credential,
@@ -116,7 +112,6 @@ def load_configuration():
         'azure_openai_api_version': azure_openai_api_version,
         'azure_ai_services_subdomain_url': azure_ai_services_subdomain_url,
         'blob_connection_string': blob_connection_string,
-        'search_blob_connection_string': search_blob_connection_string,
         'blob_container_name': blob_container_name
     }
 
@@ -382,7 +377,7 @@ def create_data_source(config):
     data_source = SearchIndexerDataSourceConnection(
         name=data_source_name,
         type="azureblob",
-        connection_string=config['search_blob_connection_string'],  # Use original
+        connection_string=config['blob_connection_string'],  # Use original
         container=container
     )
     
@@ -401,7 +396,7 @@ def create_data_source(config):
     
 #     # Extract storage account name from connection string
 #     import re
-#     connection_string = config['search_blob_connection_string']
+#     connection_string = config['blob_connection_string']
 #     account_name_match = re.search(r'AccountName=([^;]+)', connection_string)
     
 #     if account_name_match:
