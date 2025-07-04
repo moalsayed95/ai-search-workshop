@@ -1,7 +1,10 @@
-python-dotenv
+fastapi==0.115.4
+uvicorn[standard]==0.32.0
+python-dotenv==1.0.1
+pandas==2.2.3
 azure-search-documents==11.6.0b8
-azure-storage-blob
-azure-identity
-openai
-pandas
-tabulate
+azure-identity==1.19.0
+azure-core==1.32.0
+openai>=1.55.3
+pydantic==2.10.2 
+azure-storage-blob==12.23.1
